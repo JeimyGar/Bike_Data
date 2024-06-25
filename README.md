@@ -334,15 +334,26 @@ ORDER BY Time_d;
 
 The analysis results are summarized as follows:
 1. Member and casual riders have a positive correlation in their riding so that means if marketing for one then you affect both.
-2. Both are impacted similarly when it comes to time of day for ride and time of month
-3. Both member and casual riders prefer to ride when its nice and and they prefere to ride normal bikes probably 
+   ![Screenshot 2024-06-24 203549](https://github.com/JeimyGar/Bike_Data/assets/168608064/b8f73249-dfd7-4bfd-a00e-5f0c7134dcb7)
+
+3. Both are impacted similarly when it comes to time of day for ride and time of month
+   ![Screenshot 2024-06-24 203514](https://github.com/JeimyGar/Bike_Data/assets/168608064/aa6bf6b4-a82d-4df0-8c10-af2d90ae559e)
+
+5. Both member and casual riders prefer to ride when its nice and and they prefere to ride normal bikes probably
+   ![Screenshot 2024-06-24 202619](https://github.com/JeimyGar/Bike_Data/assets/168608064/ddf60be1-0831-435e-9fda-2b5ebcf32eb6)
+
+4. Bike riders prefer this certain time of day to ride their bikes and it looks like they really like to ride during the morning or something like that
+
+    ![Screenshot 2024-06-24 202902](https://github.com/JeimyGar/Bike_Data/assets/168608064/8951d021-2ade-40cd-8ad3-2ea027e6a3ad)
+
+   
+
 
 ### Recommendations 
 What actions would i recommend the company to take? use bullet points. Can say something like "Invest in marketing and promotions during peak sales season to maximze revenue"
 
 
-### Limitations 
-Did you need to modify the data in anyway?
+
 
 ### References
 
