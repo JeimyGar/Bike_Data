@@ -31,10 +31,10 @@ Bike Data: The primary datasets used for this analysis are the "Index of Bucket"
 
 ### Data Cleaning 
 In the initial data preparation phase, we performed the following tasks:
-1. Data loading and inspection.
+1. Data loading and inspection. 
 2. Handling missing values.
-3. Data cleaning and formatting. 
-
+3. Data cleaning and formatting.
+4. 
 ### Exploratory Data Analysis
 EDA involved exploring the sales data tp answer key questions, such as:
 - How do annual members and casual riders use Cyclistic bikes differently?
@@ -45,9 +45,15 @@ EDA involved exploring the sales data tp answer key questions, such as:
 
 ### Data Analysis
 
-The Data analysis was mostly done on SQL 
+The Data analysis was done in excel and SQL 
 
-This first SQL querie was done to try and add up the total rides and the ride length for each day of the week for all 12 months. CASE WHEN was used to convert numerical day of the week into its actual day. A subquery was used to sum up the total rides per day for each month UNION ALL was used to combine the results of each month from March 2023 to February 2024
+#### Excel
+In Excel I cleaned . During this process I made sure that were no duplicates. I also made sure that any irrelevant data was removed. This irrelavant data included information such as bike stations latitute and longitude data. I also checked for extreme values to make sure that they made sense. I subtracted the bike ride end time from the start time to get the ride length. I then converted this number is seconds to make it easier to work with. I removed any data that was irrelevant to my data analysis. This data included information like the longitude and latitude of bike stations. I made Pivot tables for each month showing the average ride length for casual riders vs member riders. I also convered the day of the ride into numbers with Sunday starting at 1, monday 2 and so on until we get to sunday 7. This helps to quantify the date data. The average ride length for casual riders and member riders depending on the day of the week and finally the total number of rides per week for casual and member riders. 
+
+###SQL 
+In sql I was able to upload all 12 months of data to do exploratory data analysis.
+
+One of first SQL querie was done to try and add up the total rides and the ride length for each day of the week for all 12 months. CASE WHEN was used to convert numerical day of the week into its actual day. A subquery was used to sum up the total rides per day for each month UNION ALL was used to combine the results of each month from March 2023 to February 2024
 ``` SQL
 SELECT
     CASE
@@ -151,6 +157,83 @@ FROM (
 GROUP BY 1
 ORDER BY 1;
 ```
+The following SQL querie was to join all 12 months using UNION ALL to determine the ride length total, average ride length, total casual riders, total member riders, the most used day and the electric and classic bike ride count for each month respectively
+```
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.October_2023
+GROUP BY 1
+  UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.September_2023
+GROUP BY 1
+  UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.August_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.July_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.June_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.May_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.April_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.March_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.December_2023
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.January_2024
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.February_2024
+GROUP BY 1
+UNION ALL
+SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
+ROUND(AVG(day_of_week)) AS Mode_day,
+SUM(CASE WHEN rideable_type = 'electric_bike' THEN 1 ELSE 0 END) AS electric_count, SUM(CASE WHEN rideable_type = 'classic_bike' THEN 1 ELSE 0 END) AS classic_count
+FROM flowing-blade-419819.Bike_Data.November_2023
+GROUP BY 1
+ORDER BY month ASC
+
+
+```
 This SQL code was used to join the collective 12 month data and determine the use patterns for bikes throught the day
 ```Sql
 SELECT CASE WHEN EXTRACT(HOUR FROM started_at) >= 23 OR EXTRACT(HOUR FROM started_at) <= 4 THEN 'Night' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 5 AND 11 THEN 'Morning' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 12 AND 17 THEN 'Afternoon' WHEN EXTRACT(HOUR FROM started_at) BETWEEN 18 AND 22 THEN 'Evening' END AS Time_d,
@@ -250,7 +333,9 @@ ORDER BY Time_d;
 ### Results/Findings
 
 The analysis results are summarized as follows:
-1. customer
+1. Member and casual riders have a positive correlation in their riding so that means if marketing for one then you affect both.
+2. Both are impacted similarly when it comes to time of day for ride and time of month
+3. Both member and casual riders prefer to ride when its nice and and they prefere to ride normal bikes probably 
 
 ### Recommendations 
 What actions would i recommend the company to take? use bullet points. Can say something like "Invest in marketing and promotions during peak sales season to maximze revenue"
