@@ -34,12 +34,13 @@ In the initial data preparation phase, we performed the following tasks:
 1. Data loading and inspection. 
 2. Handling missing values.
 3. Data cleaning and formatting.
-4. 
+4. I also
+   
 ### Exploratory Data Analysis
-EDA involved exploring the sales data tp answer key questions, such as:
+EDA involved exploring the sales data to answer key questions, such as:
 - How do annual members and casual riders use Cyclistic bikes differently?
 - Why would casual riders buy Cyclistic annual memberships?
-- How do days of the week and seasons influence riders prefrences? 
+- How do days of the week and seasons influence riders preference? 
 - Do bike types affect riders prefrences?
 - How can Cyclistic use digital media to influence casual riders to become members?
 
@@ -48,12 +49,12 @@ EDA involved exploring the sales data tp answer key questions, such as:
 The Data analysis was done in excel and SQL 
 
 #### Excel
-In Excel I cleaned . During this process I made sure that were no duplicates. I also made sure that any irrelevant data was removed. This irrelavant data included information such as bike stations latitute and longitude data. I also checked for extreme values to make sure that they made sense. I subtracted the bike ride end time from the start time to get the ride length. I then converted this number is seconds to make it easier to work with. I removed any data that was irrelevant to my data analysis. This data included information like the longitude and latitude of bike stations. I made Pivot tables for each month showing the average ride length for casual riders vs member riders. I also convered the day of the ride into numbers with Sunday starting at 1, monday 2 and so on until we get to sunday 7. This helps to quantify the date data. The average ride length for casual riders and member riders depending on the day of the week and finally the total number of rides per week for casual and member riders. 
+In Excel I cleaned and tranformed the data. I first made sure there no duplicates in the data.I checked for extreme values to make sure that they made sense. I subtracted the bike ride end time from the start time to get the ride length for each data point. I then converted this number to seconds to make it easier to work with. I removed any data that was irrelevant to my data analysis. This data included information like the longitude and latitude of bike stations. I made Pivot tables for each month showing the average ride length for casual riders vs member riders. I also converted the day of the ride into numbers with Sunday starting at 1, monday 2 and so on until we get to sunday 7. This helps to quantify the date data. Using a pivot table I found the average ride length for casual riders and member riders depending on the day of the week and finally the total number of rides per week for casual and member riders. 
 
 ###SQL 
 In sql I was able to upload all 12 months of data to do exploratory data analysis.
 
-One of first SQL querie was done to try and add up the total rides and the ride length for each day of the week for all 12 months. CASE WHEN was used to convert numerical day of the week into its actual day. A subquery was used to sum up the total rides per day for each month UNION ALL was used to combine the results of each month from March 2023 to February 2024
+One of first SQL querie that I made was to try and add up the total rides and the ride length for each day of the week for all 12 months. CASE WHEN was used to convert numerical day of the week into its actual day. A subquery was used to sum up the total rides per day for each month UNION ALL was used to combine the results of each month from March 2023 to February 2024. 
 ``` SQL
 SELECT
     CASE
@@ -234,7 +235,7 @@ ORDER BY month ASC
 
 
 ```
-This SQL code was used to join the collective 12 month data and determine the use patterns for bikes throught the day
+This SQL code was used to join the collective 12 month data and determine the use patterns for bikes throught the day. CASE WHEN was used to select data from different times of the day. A subquery was used to 
 ```Sql
 SELECT CASE WHEN EXTRACT(HOUR FROM started_at) >= 23 OR EXTRACT(HOUR FROM started_at) <= 4 THEN 'Night' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 5 AND 11 THEN 'Morning' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 12 AND 17 THEN 'Afternoon' WHEN EXTRACT(HOUR FROM started_at) BETWEEN 18 AND 22 THEN 'Evening' END AS Time_d,
 SUM(Total_length) AS Total_ride_length_seconds
