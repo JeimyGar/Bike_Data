@@ -31,7 +31,7 @@ In the initial data preparation phase, we performed the following tasks:
 1. Data loading and inspection. 
 2. Handling missing values.
 3. Data cleaning and formatting.
-4. I also
+4. Transforming qualitative data to quantitative data
    
 ### Exploratory Data Analysis
 EDA involved exploring the sales data to answer key questions, such as:
@@ -349,13 +349,18 @@ The analysis results are summarized as follows:
 
 
 ### Recommendations 
-What actions would i recommend the company to take? use bullet points. Can say something like "Invest in marketing and promotions during peak sales season to maximze revenue"
+Based on the Results/ Findings there are a few things that stand out. Since there is a positive correlation between members and non members, what you do for one will impact the other.
 
-If I could I would consider A/B testing to evaluate the effectiveness of different promotional strategies. Since there is a positive correlation between member and casual riders to increase membership I would try to focus on targeting marketing efforts during peak riding seasons. These months are idk may threw septemebr maybe. Promotions and deals for members during these peak months could help convert casual riders into members. 
-
-
-
-
-
+- Peak Riding Seasons 
+   - Focuse on marketing efforts from May to September, as these seem to be the most popular monthts to ride.
+   - Offer special membership discounts during these months.
+ - Referral Program
+   - Encourage members to refer others.
+- Safety Features
+   - Since rides are less common during the night hours highlight security cameras, well-lit stations, reflective equipment and other safety features in promotional material to encourage evening and night time riding
+- Off-Peak Incentives
+   - Provide incentives in the months of dada to adfad to encourage member sign ups. These incentives can incluse things such as guided tours, free rides or free helmets for member sign ups.
+- A/B testing
+   - Evaluate different promotional stategies using A/B testing 
 
 
