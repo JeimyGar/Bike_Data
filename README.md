@@ -13,12 +13,12 @@ Understanding how casual riders and annual members use Cyclistic bikes different
 
 ### Project Overview
 
-Cyclistic is a bike_share company based in Chicago that wants to maximize the number of annual memberships. This data analysis project aims to provide insight into how annual members and casual riders differ. This is important to understand why casual riders would buy a membership and how digital media could affect their marketing tactics.
+Cyclistic is a bike_share company based in Chicago that aims to maximize the number of annual memberships. This data analysis project seeks to provide insight into the difference between annual membership and casual riders. Understanding why casual riders might purchase a membership and how digital medial could impact their marketing tactics is crucial because it directly influences efforts to increase membership numbers.
 
 
 ### Data Sources
 
-Bike Data: The primary datasets used for this analysis are the "Index of Bucket" files which can be found HERE. These datasets are seperated by months. They include the following columns: ride_id, rideabe_type, started_at, ended_at, start_station_name, start_station_id, end_station_name, end_station_id, and member_casual. I chose datasets for 12 months starting in March 2023 to February 2024. 
+Bike Data: The primary datasets used for this analysis are the "divvy-tripdata" files which can be found [here](https://divvy-tripdata.s3.amazonaws.com/index.html). These datasets are seperated by months. They include the following columns: ride_id, rideabe_type, started_at, ended_at, start_station_name, start_station_id, end_station_name, end_station_id, and member_casual. I chose data for 12 months starting in March 2023 to February 2024. 
 
 ### Tools
 
@@ -46,12 +46,14 @@ EDA involved exploring the sales data to answer key questions, such as:
 The Data analysis was done in excel and SQL 
 
 #### Excel
-In Excel I cleaned and tranformed the data. I first made sure there no duplicates in the data.I checked for extreme values to make sure that they made sense. I subtracted the bike ride end time from the start time to get the ride length for each data point. I then converted this number to seconds to make it easier to work with. I removed any data that was irrelevant to my data analysis. This data included information like the longitude and latitude of bike stations. I made Pivot tables for each month showing the average ride length for casual riders vs member riders. I also converted the day of the ride into numbers with Sunday starting at 1, monday 2 and so on until we get to sunday 7. This helps to quantify the date data. Using a pivot table I found the average ride length for casual riders and member riders depending on the day of the week and finally the total number of rides per week for casual and member riders. 
+In Excel, I cleaned and tranformed the data. First, I ensured there were no duplicates in the dataset. Next, I checked for extreme values to verify their validity. To calculate ride length for each data poiont, I subtracted the bike ride end time from the start time. I then converted this number to seconds for easier analysis. Irrelevant data, such as longitude and latitude of bike ride stations, was removed. Additionally, I converted the day of the ride into numerical values, with Sunday starting at 1, Monday 2 and so on until Saturday 7. This quantified the date data. For further analysis, I created Pivot tables for each month, showing the average ride length for casual riders vs member riders. Using another Pivot table, I determined the average ride length for casual riders and member riders based on the day of the week. Finally, I calculated the total number of rides per week for both casual and member riders.
 
 ###SQL 
-In sql I was able to upload all 12 months of data to do exploratory data analysis.
+In SQL I was able to upload all 12 months of data to do exploratory data analysis.
 
-This Query combines data from multiple months (March 2023 to February 2024) into a single dataset using UNION ALL. I used a CASE statement to map the numeric day of the week to its corresponding name. I used a subquery to select the day of the week, as well as to count all which I renamed as 'occurances', and to sum up the ride_length_seconds which I renamed total_ride length seconds. I repeated this for all the months and combined it using UNION ALL into a single dataset. I had to use GROUP to group the results bu the day of the week. Outside of the subquery I was able to get the COUNT of 'occurences' of rides each day as well as the sum of ride lengths in seconds (Total_length) for each day. With this I was able to get insight into ride patterns, total ride occurrences and total ride lengths for each day of the week.
+This query combines data from multiple months (March 2023 to February 2024) into a single dataset using UNION ALL. I used a CASE statement to map the numeric day of the week to its corresponding name. Additionally, I employed a subquery to select the day of the week, count occurrences(which I renamed as 'occurrences'), and sum up the ride lengths in seconds (renames as 'total_ride_lenght_seconds'). I repeated this process for all the months and combined the results uring UNION ALL into a single dataset. Finally, outside of the subquery, I used GROUP BY to group the results by the day of the week.
+I also obtained the total number of rides ('Total_rides') by adding up all the 'occurences' in the subquery using SUM. Additionally, I calculated the total ride length ('Ride_length_seconds') by summing up all of the 'Total_length' values obtained in the subquery. This analysis provided insight into ride patterns, total ride occurrences, and total ride lengths for each day of the week.
+
 ``` SQL
 SELECT
     CASE
