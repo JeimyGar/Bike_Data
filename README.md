@@ -157,7 +157,14 @@ FROM (
 GROUP BY 1
 ORDER BY 1;
 ```
-The following SQL querie combines data from multiple months (March 2023 to February 2024) into a single dataset using UNION ALL. I was bale to calculate various aggregate metrics for each month for example: Ride_length_total sums up the ride lengths in seconds and Average_ride_length rounds the average ride length in seconds. Total_casual and Total_member count the number of rides per casual and member users respectively. I also found the mode of the day of week using MODE. Lastly, I got the number of rides on electric and classic bikes. This all gave me important insight into ride patterns, average ride lengths, user types and bike types for each month.
+The following SQL query combines data from multiple months (March 2023 to February 2024) into a single dataset using UNION ALL. I was able to calculate various aggregate metrics for each month. For example:
+   - 'Ride_length_total' sums up the ride lengths in seconds 
+   - 'Average_ride_length' rounds the average ride length in seconds.
+   -  Total_casual and Total_member count the number of rides per casual and member users, respectively.
+   -  I also found the most frequented day of week using the MODE function.
+   -  Lastly, I obtained the number of rides on electric and classic bikes.
+All of this provided important insight into ride patterns, average ride lengths, user types, and bike types for each month.
+     
 ``` SQL
 SELECT EXTRACT(MONTH FROM started_at) as month, SUM(ride_length_seconds) AS ride_length_total, ROUND(AVG(ride_length_seconds)) AS Average_ride_length, SUM(CASE WHEN member_casual = 'member' THEN 1 ELSE 0 END) AS total_casual, SUM(CASE WHEN member_casual = 'casual' THEN 1 ELSE 0 END) AS total_member,
 ROUND(AVG(day_of_week)) AS Mode_day,
@@ -234,7 +241,7 @@ ORDER BY month ASC
 
 
 ```
-This following query is used to calculate the total ride length in seconds (Total_ride_length_seconds) for different time periods of the day. It categorizes the ride start times into four time of the day brackets: 'Night', 'Morning', 'Afternoon', and 'Evening'. I used a CASE statement to assign each ride to one of these time brackets based on the hour of the started_at timestamp. I was able to exctract the hour component from the timestamp data by using EXTRACT. I then calculated the total ride length for each timestamp using SUM(ride_length_seconds). Since we are working with different data sets, I used UNION ALL to combine all of the months into a single dataset.
+This following query is used to calculate the total ride length in seconds ('Total_ride_length_seconds') for different time periods of the day. It categorizes the ride start times into four time-of-day brackets: 'Night', 'Morning', 'Afternoon', and 'Evening'. I used a CASE statement to assign each ride to one of these time brackets based on the hour of the 'started_at' timestamp. I was able to extract the hour component from the timestamp data by using EXTRACT. Next, I calculated the total ride length for each timestamp using SUM(ride_length_seconds). Since we are working with different data sets, I used UNION ALL to combine all of the months into a single dataset.
 
 ```Sql
 SELECT CASE WHEN EXTRACT(HOUR FROM started_at) >= 23 OR EXTRACT(HOUR FROM started_at) <= 4 THEN 'Night' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 5 AND 11 THEN 'Morning' WHEN EXTRACT(HOUR FROM started_at)BETWEEN 12 AND 17 THEN 'Afternoon' WHEN EXTRACT(HOUR FROM started_at) BETWEEN 18 AND 22 THEN 'Evening' END AS Time_d,
@@ -334,16 +341,16 @@ ORDER BY Time_d;
 ### Results/Findings
 
 The analysis results are summarized as follows:
-1. Member and casual riders have a positive correlation in their riding so that means if marketing for one then you affect both.
+1. This scatter plot shows the relationship between total members(on the y-axis) and total casual riders (on the x-axis) over 12 months. The positive correlation suggests that as the number of casual riders increases, the total membership also tend to rise.
    ![Screenshot 2024-06-24 203549](https://github.com/JeimyGar/Bike_Data/assets/168608064/b8f73249-dfd7-4bfd-a00e-5f0c7134dcb7)
 
-3. Both are impacted similarly when it comes to time of day for ride and time of month
+2. The "Monthly Ride Length Comparison: Electric vs. Bike Rides" line graph illustrates ride counts(y-axis) across different months (x-axis). There are two lines: the red line represents classic bike rides, and the blue line represents electric bike rides. Notably, both types of rides exhibit increased activity starting in the third month, with peak usage occurring during the summer months. 
    ![Screenshot 2024-06-24 203514](https://github.com/JeimyGar/Bike_Data/assets/168608064/aa6bf6b4-a82d-4df0-8c10-af2d90ae559e)
 
-5. Both member and casual riders prefer to ride when its nice and and they prefere to ride normal bikes probably
+3. This "Weekly Total Bike Rides" bar graph displays the total ride count (y-axis) across different days of the week (x-axis). The data was aggregated by summing up ride information for each day over a 12 month period. As we can see, thursday is the most popular day for rides.
    ![Screenshot 2024-06-24 202619](https://github.com/JeimyGar/Bike_Data/assets/168608064/ddf60be1-0831-435e-9fda-2b5ebcf32eb6)
 
-4. Bike riders prefer this certain time of day to ride their bikes and it looks like they really like to ride during the morning or something like that
+4. The "Total Bike Rides by Time of Day" graph depicts ride length (in seconds) on the y-axis against different times of day on the x-axis. The data was aggregated by counting ride starting times over a 12-month period. Notably, notably the most popular time for rides is in the afternoon, while the least popular times is at night.
 
     ![Screenshot 2024-06-24 202902](https://github.com/JeimyGar/Bike_Data/assets/168608064/8951d021-2ade-40cd-8ad3-2ea027e6a3ad)
 
@@ -354,7 +361,7 @@ The analysis results are summarized as follows:
 Based on the Results/ Findings there are a few things that stand out. Since there is a positive correlation between members and non members, what you do for one will impact the other.
 
 - Peak Riding Seasons 
-   - Focuse on marketing efforts from May to September, as these seem to be the most popular monthts to ride.
+   - Focuse on marketing efforts from April to September, as these seem to be the most popular monthts to ride.
    - Offer special membership discounts during these months.
  - Referral Program
    - Encourage members to refer others.
