@@ -358,7 +358,7 @@ The analysis results are summarized as follows:
 
 
 ### Recommendations 
-Based on the Results/ Findings there are a few things that stand out. Since there is a positive correlation between members and non members, what you do for one will impact the other.
+Based on the results/ findings there are a few things that stand out. Since there is a positive correlation between members and non members, what you do for one will impact the other.
 
 - Peak Riding Seasons 
    - Focuse on marketing efforts from April to September, as these seem to be the most popular monthts to ride.
