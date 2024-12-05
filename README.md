@@ -48,7 +48,7 @@ The Data analysis was done in excel and SQL
 #### Excel
 In Excel, I cleaned and tranformed the data. First, I ensured there were no duplicates in the dataset. Next, I checked for extreme values to verify their validity. To calculate ride length for each data poiont, I subtracted the bike ride end time from the start time. I then converted this number to seconds for easier analysis. Irrelevant data, such as longitude and latitude of bike ride stations, was removed. Additionally, I converted the day of the ride into numerical values, with Sunday starting at 1, Monday 2 and so on until Saturday 7. This quantified the date data. For further analysis, I created Pivot tables for each month, showing the average ride length for casual riders vs member riders. Using another Pivot table, I determined the average ride length for casual riders and member riders based on the day of the week. Finally, I calculated the total number of rides per week for both casual and member riders.
 
-###SQL 
+### SQL 
 In SQL I was able to upload all 12 months of data to do exploratory data analysis.
 
 This query combines data from multiple months (March 2023 to February 2024) into a single dataset using UNION ALL. I used a CASE statement to map the numeric day of the week to its corresponding name. Additionally, I employed a subquery to select the day of the week, count occurrences(which I renamed as 'occurrences'), and sum up the ride lengths in seconds (renames as 'total_ride_lenght_seconds'). I repeated this process for all the months and combined the results uring UNION ALL into a single dataset. Finally, outside of the subquery, I used GROUP BY to group the results by the day of the week.
